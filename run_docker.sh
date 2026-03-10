@@ -1,0 +1,1 @@
+docker run --name farm-vehicle -v $PWD:/source --device /dev/ttyUSB0:/dev/ttyUSB0 -it --rm klavins/elma:latest bash

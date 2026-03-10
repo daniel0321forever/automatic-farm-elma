@@ -9,3 +9,5 @@ tmp/
 *.a
 .DS_Store
 *.o
+
+.vscode/

@@ -25,7 +25,8 @@ SOURCES     := $(wildcard $(SRCDIR)/*.cc)
 OBJECTS     := $(patsubst %.cc, $(BUILDDIR)/%.o, $(notdir $(SOURCES)))
 
 #Defauilt Make
-all: directories $(TARGETDIR)/$(TARGET) tests example
+.PHONY: all tests example farm_robot directories clean spotless remake docs
+all: directories $(TARGETDIR)/$(TARGET) tests example farm_robot
 	echo $(SOURCES) $(HEADERS)
 
 #Remake
@@ -42,6 +43,9 @@ tests:
 example:
 	cd examples && $(MAKE)
 
+farm_robot:
+	cd farm_robot && $(MAKE)
+
 docs: docs/index.html
 
 docs/index.html: $(SOURCES) $(HEADERS) README.md docs.config dox/* examples/*.cc
@@ -53,12 +57,14 @@ clean:
 	@$(RM) -rf $(BUILDDIR)/*.o
 	cd test && $(MAKE) clean
 	cd examples && $(MAKE) clean
+	cd farm_robot && $(MAKE) clean
 
 #Full Clean, Objects and Binaries
 spotless: clean
 	@$(RM) -rf $(TARGETDIR)/$(TARGET) *.db
 	@$(RM) -rf build lib docs/*
 	cd test && $(MAKE) spotless
+	cd farm_robot && $(MAKE) clean
 
 #Link
 $(TARGETDIR)/$(TARGET): $(OBJECTS) $(HEADERS)

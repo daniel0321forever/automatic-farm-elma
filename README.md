@@ -42,7 +42,7 @@ To install Elma without using Docker, you will need to install the following too
 - Make (if you want to use the makefile. Alternatively, you can use some other build manager)
 - [Doxygen](http://www.doxygen.nl/)
 - [Google Test](https://github.com/google/googletest)
-- Neils Lohmann's JSON library: https://github.com/nlohmann/json. Note you will need to change json.hpp to json.h.
+- Neils Lohmann's JSON library: https://github.com/nlohmann/json. Note you will need to change json.h to json.h.
 - [My fork](https://github.com/klavins/cpp-httplib.git) of [yhirose](https://github.com/yhirose)'s HTTP library
 
 Installation on Unix systems (e.g. Raspbian)
@@ -73,8 +73,8 @@ Next, install the json library
 
     sudo mkdir /usr/local/include/json
     cd /usr/local/include/json
-    sudo curl -O -J -L https://github.com/nlohmann/json/releases/download/v3.5.0/json.hpp
-    sudo mv json.hpp json.h
+    sudo curl -O -J -L https://github.com/nlohmann/json/releases/download/v3.5.0/json.h
+    sudo mv json.h json.h
 
 Next, install httplib
 

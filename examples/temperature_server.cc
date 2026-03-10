@@ -14,7 +14,7 @@ long int unix_timestamp() {
 int main(void)
 {
     using namespace httplib;
-    using nlohmann::json; 
+    using nlohmann::json;
 
     Server svr;
 

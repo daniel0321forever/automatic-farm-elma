@@ -36,8 +36,8 @@ RUN cmake ../ && make && make install
 # Install json.h
 RUN mkdir /usr/local/include/json
 WORKDIR /usr/local/include/json
-RUN curl -O -J -L https://github.com/nlohmann/json/releases/download/v3.5.0/json.hpp
-RUN mv json.hpp json.h
+RUN curl -O -J -L https://github.com/nlohmann/json/releases/download/v3.5.0/json.h
+RUN mv json.h json.h
 
 # Install httplib
 WORKDIR /tmp
