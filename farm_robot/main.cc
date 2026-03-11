@@ -1,3 +1,12 @@
+/**
+ * @file main.cc
+ * @brief Entry point for the automatic farm robot application.
+ *
+ * Creates shared state, module instances (vehicle, checkpoint, apriltag, robot arm,
+ * planting/harvest detectors) via factories, wires up controllers and the FSM,
+ * and runs the Elma manager for 30 seconds.
+ */
+
 #include <chrono>
 #include <cstring>
 #include <iostream>
@@ -29,6 +38,7 @@
 using namespace std::chrono;
 using namespace elma;
 
+//! Creates and returns the vehicle module (mock or ElintTech) per Config::VEHICLE_MODULE_TYPE.
 static std::shared_ptr<farm_robot::IVehicleModule> createVehicle() {
     if (std::strcmp(farm_robot::Config::VEHICLE_MODULE_TYPE, "elintech") == 0) {
         return std::make_shared<farm_robot::ElintTechVehicleModule>(
@@ -38,6 +48,7 @@ static std::shared_ptr<farm_robot::IVehicleModule> createVehicle() {
     return std::make_shared<farm_robot::MockVehicleModule>();
 }
 
+//! Creates and returns the checkpoint sensor module (mock or ElintTech), optionally using the vehicle.
 static std::shared_ptr<farm_robot::ICheckpointSensorModule> createCheckpoint(
     const std::shared_ptr<farm_robot::IVehicleModule>& vehicle) {
     if (std::strcmp(farm_robot::Config::CHECKPOINT_SENSOR_MODULE_TYPE,
@@ -47,22 +58,27 @@ static std::shared_ptr<farm_robot::ICheckpointSensorModule> createCheckpoint(
     return std::make_shared<farm_robot::MockCheckpointSensor>();
 }
 
+//! Creates and returns the AprilTag sensor module (currently mock only).
 static std::shared_ptr<farm_robot::IApriltagSensorModule> createApriltag() {
     return std::make_shared<farm_robot::MockApriltagSensorModule>();
 }
 
+//! Creates and returns the robot arm module (currently mock only).
 static std::shared_ptr<farm_robot::IRobotArmModule> createRobotArm() {
     return std::make_shared<farm_robot::MockRobotArmModule>();
 }
 
+//! Creates and returns the planting detector module (currently mock only).
 static std::shared_ptr<farm_robot::IPlantingDetectorModule> createPlantingDetector() {
     return std::make_shared<farm_robot::MockPlantingDetector>();
 }
 
+//! Creates and returns the harvest detector module (currently mock only).
 static std::shared_ptr<farm_robot::IHarvestDetectorModule> createHarvestDetector() {
     return std::make_shared<farm_robot::MockHarvestDetector>();
 }
 
+//! Builds shared state, modules, controllers, and FSM; runs the Elma manager for 30 seconds.
 int main() {
     farm_robot::SharedState sharedState;
 

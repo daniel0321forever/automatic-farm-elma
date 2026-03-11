@@ -14,7 +14,9 @@ namespace farm_robot {
 
 class MockCheckpointSensor : public ICheckpointSensorModule {
 public:
+    //! No-op connect for mock.
     void connect() override;
+    //! Returns true periodically to simulate checkpoint detection.
     bool detect() override;
 };
 

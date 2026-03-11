@@ -20,15 +20,16 @@ class IHarvestDetectorModule {
 public:
     virtual ~IHarvestDetectorModule() = default;
 
+    //! Connects to the detector (e.g. camera or mock).
     virtual void connect() = 0;
+    //! Disconnects from the detector.
     virtual void disconnect() = 0;
+    //! Loads the detection model from the given path.
     virtual void loadModel(const std::string& modelPath) = 0;
+    //! Disposes of model resources.
     virtual void disposeModel() = 0;
 
-    /**
-     * Run detection and return target coordinates (x, y, z) in robot frame.
-     * @return optional 3D coordinate if detected, empty otherwise
-     */
+    //! Runs detection and returns target (x,y,z) in robot frame if detected.
     virtual std::optional<std::array<double, 3>> detect() = 0;
 };
 

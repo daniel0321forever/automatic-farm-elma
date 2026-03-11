@@ -15,12 +15,10 @@ class ICheckpointSensorModule {
 public:
     virtual ~ICheckpointSensorModule() = default;
 
+    //! Connects to the checkpoint sensor (e.g. serial or mock).
     virtual void connect() = 0;
 
-    /**
-     * Detect if checkpoint is reached.
-     * @return true if checkpoint reached, false otherwise
-     */
+    //! Returns true if a checkpoint is detected, false otherwise.
     virtual bool detect() = 0;
 };
 

@@ -22,22 +22,30 @@ class IApriltagSensorModule;
 
 class ModuleContainer {
 public:
+    //! Returns the singleton container instance.
     static ModuleContainer& instance();
 
     ModuleContainer(const ModuleContainer&) = delete;
     ModuleContainer& operator=(const ModuleContainer&) = delete;
 
+    //! Returns the configured vehicle module.
     std::shared_ptr<IVehicleModule> vehicleModule();
+    //! Returns the configured robot arm module.
     std::shared_ptr<IRobotArmModule> robotArmModule();
+    //! Returns the configured harvest detector module.
     std::shared_ptr<IHarvestDetectorModule> harvestDetector();
+    //! Returns the configured planting detector module.
     std::shared_ptr<IPlantingDetectorModule> plantingDetector();
+    //! Returns the configured checkpoint sensor module.
     std::shared_ptr<ICheckpointSensorModule> checkpointSensorModule();
+    //! Returns the configured AprilTag sensor module.
     std::shared_ptr<IApriltagSensorModule> apriltagSensorModule();
 
 private:
     ModuleContainer() = default;
 };
 
+//! Returns the global module container singleton.
 inline ModuleContainer& getContainer() {
     return ModuleContainer::instance();
 }

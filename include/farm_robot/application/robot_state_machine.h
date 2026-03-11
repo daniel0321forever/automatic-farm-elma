@@ -25,6 +25,7 @@ class IRobotArmModule;
 
 class RobotStateMachine : public elma::StateMachine {
 public:
+    //! Constructs FSM with name and all required state/controller/module dependencies.
     RobotStateMachine(
         const std::string& name,
         SharedState* sharedState,
@@ -38,9 +39,12 @@ public:
         std::shared_ptr<IHarvestDetectorModule> harvestDetector,
         std::shared_ptr<IRobotArmModule> robotArmModule);
 
+    //! Initializes modules, sets initial state and transitions, starts checkpoint controller.
     void init() override;
     void start() override;
+    //! Delegates to StateMachine::update().
     void update() override;
+    //! Stops checkpoint controller and disconnects modules.
     void stop() override;
 
     ~RobotStateMachine();

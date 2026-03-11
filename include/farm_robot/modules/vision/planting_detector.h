@@ -19,15 +19,16 @@ class IPlantingDetectorModule {
 public:
     virtual ~IPlantingDetectorModule() = default;
 
+    //! Connects to the detector (e.g. camera or mock).
     virtual void connect() = 0;
+    //! Disconnects from the detector.
     virtual void disconnect() = 0;
+    //! Loads the detection model from the given path.
     virtual void loadModel(const std::string& modelPath) = 0;
+    //! Disposes of model resources.
     virtual void dispose() = 0;
 
-    /**
-     * Run detection and return planting point coordinates (x, y, z) in robot frame.
-     * @return list of 3D coordinates
-     */
+    //! Runs detection and returns planting point coordinates (x,y,z) in robot frame.
     virtual std::vector<std::array<double, 3>> detect() = 0;
 };
 

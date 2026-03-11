@@ -26,6 +26,7 @@ namespace farm_robot {
 
 namespace {
 
+//! Holds pointers to shared state, controllers, and modules used by all FSM states.
 struct FsmContext {
     SharedState* sharedState{nullptr};
     VehicleController* vehicleController{nullptr};
@@ -41,13 +42,16 @@ struct FsmContext {
     int goingToChargingCount{0};
 };
 
+//! State: robot is cruising; polls AprilTag for box and requested checkpoint events.
 // --- Cruising ---
 class CruisingState : public elma::State {
 public:
     explicit CruisingState(FsmContext* ctx) : elma::State(Config::ROBOT_STATE_CRUISING), ctx_(ctx) {}
+    //! Sets shared state to cruising.
     void entry(const elma::Event&) override {
         if (ctx_->sharedState) ctx_->sharedState->setRobotState(Config::ROBOT_STATE_CRUISING);
     }
+    //! Polls AprilTag for box_on_position; processes requested reach_checking_point event.
     void during() override {
         if (!ctx_->apriltagModule || !ctx_->sharedState) return;
         ctx_->updateCount++;
@@ -70,6 +74,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: reached a checkpoint; tells vehicle controller to advance to next checkpoint.
 // --- ReachCheckingPoint ---
 class ReachCheckingPointState : public elma::State {
 public:
@@ -84,6 +89,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: driving to charging station; after delay emits stopped_at_charging_station.
 // --- GoingToChargingStation ---
 class GoingToChargingStationState : public elma::State {
 public:
@@ -106,6 +112,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: stopped at charging station; sends charging signal and emits charging.
 // --- StoppedAtChargingStation ---
 class StoppedAtChargingStationState : public elma::State {
 public:
@@ -121,6 +128,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: robot is charging (vehicle charge called).
 // --- Charging ---
 class ChargingState : public elma::State {
 public:
@@ -135,6 +143,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: stopping at new box; sends current box, waits for scaffold, then emits new_box_is_ready.
 // --- StoppingAtNewBox ---
 class StoppingAtNewBoxState : public elma::State {
 public:
@@ -156,6 +165,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: new box ready; sets in-box index to 0 and emits going_to_next_target.
 // --- NewBoxIsReady ---
 class NewBoxIsReadyState : public elma::State {
 public:
@@ -173,6 +183,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: going to next target in box; drives to target index then emits stopped_at_next_target.
 // --- GoingToNextTarget ---
 class GoingToNextTargetState : public elma::State {
 public:
@@ -190,6 +201,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: stopped at next target; uses planting/harvest detector and either emits performing_task or cruising.
 // --- StoppedAtNextTarget ---
 class StoppedAtNextTargetState : public elma::State {
 public:
@@ -225,6 +237,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: performing task (plant/harvest) with robot arm then emits finish_box.
 // --- PerformingTask ---
 class PerformingTaskState : public elma::State {
 public:
@@ -248,6 +261,7 @@ private:
     FsmContext* ctx_;
 };
 
+//! State: finish box; sends finish signal, clears box/apriltag, emits cruising.
 // --- FinishBox ---
 class FinishBoxState : public elma::State {
 public:

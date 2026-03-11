@@ -19,8 +19,10 @@ class ElintTechVehicleModule;
 
 class ElintTechCheckpointSensor : public ICheckpointSensorModule {
 public:
+    //! Constructs sensor that uses the given vehicle module for node/checkpoint status.
     explicit ElintTechCheckpointSensor(std::shared_ptr<IVehicleModule> vehicleModule);
     void connect() override;
+    //! Returns true when vehicle reports checkpoint (on_node); uses throttling.
     bool detect() override;
 private:
     std::shared_ptr<IVehicleModule> vehicleModule_;

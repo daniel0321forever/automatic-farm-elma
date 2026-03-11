@@ -19,13 +19,12 @@ class IApriltagSensorModule {
 public:
     virtual ~IApriltagSensorModule() = default;
 
+    //! Connects to the AprilTag sensor (e.g. camera or mock).
     virtual void connect() = 0;
+    //! Disconnects from the sensor.
     virtual void disconnect() = 0;
 
-    /**
-     * Detect box AprilTag on the ground.
-     * @return ApriltagDetection if detected, empty otherwise
-     */
+    //! Detects box AprilTag; returns detection if found, empty otherwise.
     virtual std::optional<ApriltagDetection> detectBox() = 0;
 };
 

@@ -12,10 +12,7 @@ namespace farm_robot {
 
 class Scheduler {
 public:
-    /**
-     * Check if the current time is within configured work hours.
-     * @return true if within work hours, false otherwise
-     */
+    //! Returns true if the current time is within configured work hours.
     static bool isWorkTime();
 };
 

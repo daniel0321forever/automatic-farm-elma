@@ -18,38 +18,16 @@ class IRobotArmModule {
 public:
     virtual ~IRobotArmModule() = default;
 
-    /**
-     * Initialize the robot arm module. 
-     */
+    //! Initializes the robot arm (e.g. connect and home).
     virtual void initialize() = 0;
-
-    /**
-     * Move the robot arm to the standby position.
-     * 
-     * @param positionName The name of the standby position.
-     * @param speed The speed of the robot arm.
-     */
+    //! Moves the arm to a named standby position at given speed.
     virtual void moveToStandby(const std::string& positionName, int speed) = 0;
-
-    /**
-     * Close the robot arm. 
-     */
+    //! Closes and disconnects the robot arm.
     virtual void close() = 0;
-
-    /**
-     * Pick seedling at pickPos and plant at plantPos (x, y, z in mm).
-     * @param pickPos The position to pick the seedling.
-     * @param plantPos The position to plant the seedling.
-     * @return True if the seedling is picked and planted successfully, false otherwise.
-     */
+    //! Picks at pickPos and plants at plantPos (x,y,z mm); returns true on success.
     virtual bool pickAndPlant(const std::array<double, 3>& pickPos,
                               const std::array<double, 3>& plantPos) = 0;
-
-    /**
-     * Go to harvest position and harvest vegetable.
-     * @param harvestPos The position to harvest the vegetable.
-     * @return True if the vegetable is harvested successfully, false otherwise.
-     */
+    //! Moves to harvest position and harvests; returns true on success.
     virtual bool goToHarvest(const std::array<double, 3>& harvestPos) = 0;
 };
 

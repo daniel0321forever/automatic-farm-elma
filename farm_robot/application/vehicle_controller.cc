@@ -19,6 +19,7 @@ namespace farm_robot {
 
 namespace {
 
+//! Builds the fixed route sequence of vehicle commands for one cycle.
 std::vector<VehicleControlCommand> buildRoute() {
     return {
         VehicleControlCommand::MOVE_FORWARD,

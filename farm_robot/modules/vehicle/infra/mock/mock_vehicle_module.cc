@@ -15,6 +15,7 @@ namespace farm_robot {
 
 namespace {
 
+//! Returns a human-readable string for a vehicle control command.
 const char* commandToMessage(VehicleControlCommand cmd) {
     switch (cmd) {
         case VehicleControlCommand::STOP:

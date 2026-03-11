@@ -16,6 +16,7 @@ class MockApriltagSensorModule : public IApriltagSensorModule {
 public:
     void connect() override;
     void disconnect() override;
+    //! Returns mock detection (e.g. box on position) for testing.
     std::optional<ApriltagDetection> detectBox() override;
 };
 

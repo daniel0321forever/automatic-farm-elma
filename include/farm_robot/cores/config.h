@@ -16,6 +16,7 @@
 
 namespace farm_robot {
 
+//! Central configuration constants and helpers for the farm robot.
 struct Config {
     // Working hours
     static constexpr int WORK_START_HOUR = 0;
@@ -49,18 +50,23 @@ struct Config {
     static constexpr const char* CHECKPOINT_SENSOR_MODULE_TYPE = "mock";
 
     // Task list
+    //! Returns the list of task names (e.g. planting, harvesting).
     static std::vector<std::string> tasks();
 
     // End-of-aisle tag IDs
+    //! Returns map of aisle index to end-of-aisle AprilTag id.
     static std::unordered_map<int, int> endOfAisleTags();
 
     // Box tags
+    //! Returns list of box AprilTag ids.
     static std::vector<int> boxTags();
 
     // Model paths
+    //! Returns map of model name to file path.
     static std::unordered_map<std::string, std::string> modelPaths();
 
     // Root directory
+    //! Returns the project root directory path.
     static std::string rootDir();
 
     // Robot state strings

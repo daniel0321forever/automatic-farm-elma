@@ -18,6 +18,7 @@ namespace farm_robot {
 
 class ElintTechVehicleModule : public IVehicleModule {
 public:
+    //! Constructs module for the given serial port and baudrate.
     ElintTechVehicleModule(const std::string& port, int baudrate);
     void connect() override;
     void disconnect() override;
@@ -27,13 +28,17 @@ public:
     VehicleControlCommand currentMotionStatus() override;
     void control(VehicleControlCommand command) override;
 
-    /** Thread-safe: returns status object from read_status, or empty {} on failure. */
+    //! Thread-safe: returns status JSON from device, or empty object on failure.
     nlohmann::json readStatus();
 
 private:
+    //! Computes CRC16 for the given string.
     uint16_t crc16(const std::string& data);
+    //! Builds a simple command string.
     std::string buildSimpleCmd(const std::string& cmd);
+    //! Builds a run command with move, speed, count, and timing.
     std::string buildRunCmd(int move, int speed, int cnt = 0, int us = 1);
+    //! Sends a command and returns the response JSON.
     nlohmann::json sendCmd(const std::string& cmd);
 
     int serial_fd_{-1};

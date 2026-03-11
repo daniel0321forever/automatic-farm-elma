@@ -20,15 +20,20 @@ class ICheckpointSensorModule;
 
 class CheckpointSensorController {
 public:
+    //! Constructs controller with shared state and checkpoint sensor module.
     CheckpointSensorController(SharedState* sharedState,
                                std::shared_ptr<ICheckpointSensorModule> checkpointSensor);
 
     ~CheckpointSensorController();
+    //! Starts the sensor thread (calls connect() and run() in a thread).
     void start();
+    //! Signals the thread to stop.
     void stop();
+    //! Joins the sensor thread if it is joinable.
     void join();
 
 private:
+    //! Loop: while running, if cruising and sensor detects checkpoint, sets requested event.
     void run();
 
     SharedState* sharedState_;

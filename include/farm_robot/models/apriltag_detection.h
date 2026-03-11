@@ -19,6 +19,7 @@ struct ApriltagDetection {
     bool onPosition;
     double validity;
 
+    //! Constructs a detection with the given id, type, on-position flag, and validity.
     ApriltagDetection(int id, ApriltagType type, bool onPos, double val)
         : tagId(id), tagType(type), onPosition(onPos), validity(val) {}
 };

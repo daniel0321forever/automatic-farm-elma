@@ -11,6 +11,7 @@
 
 namespace farm_robot {
 
+//! Vehicle motion commands for AGV control.
 enum class VehicleControlCommand {
     STOP = 0,
     TURN_RIGHT = 1,
@@ -24,10 +25,12 @@ enum class VehicleControlCommand {
     ROTATE = 9
 };
 
+//! AprilTag classification (e.g. box).
 enum class ApriltagType {
     BOX
 };
 
+//! Vision task mode (planting, harvesting, or detecting AprilTag).
 enum class VisionTask {
     PLANTING,
     HARVESTING,

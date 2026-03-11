@@ -17,8 +17,10 @@ public:
     void initialize() override;
     void moveToStandby(const std::string& positionName, int speed) override;
     void close() override;
+    //! Logs and returns true (mock success).
     bool pickAndPlant(const std::array<double, 3>& pickPos,
                       const std::array<double, 3>& plantPos) override;
+    //! Logs and returns true (mock success).
     bool goToHarvest(const std::array<double, 3>& harvestPos) override;
 };
 

@@ -22,6 +22,7 @@ public:
     VehicleControlCommand currentMotionStatus() override;
     void control(VehicleControlCommand command) override;
 private:
+    //! Last command sent; returned by currentMotionStatus().
     VehicleControlCommand cachedCommand_{VehicleControlCommand::STOP};
 };
 
